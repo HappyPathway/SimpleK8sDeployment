@@ -1,33 +1,33 @@
-resource "kubernetes_service" "example" {
+resource "kubernetes_service" "service" {
   metadata {
-    name = "terraform-example"
+    name = "${var.service_name}"
   }
   spec {
     selector {
-      app = "${kubernetes_pod.example.metadata.0.labels.app}"
+      app = "${kubernetes_pod.pod.metadata.0.labels.app}"
     }
     session_affinity = "ClientIP"
     port {
-      port = 8080
-      target_port = 80
+      port = "${var.service_port}"
+      target_port = "${var.service_target_port}"
     }
 
     type = "LoadBalancer"
   }
 }
 
-resource "kubernetes_pod" "example" {
+resource "kubernetes_pod" "pod" {
   metadata {
-    name = "terraform-example"
+    name = "${var.service_name}"
     labels {
-      app = "MyApp"
+      app = "${var.service_name}"
     }
   }
 
   spec {
     container {
-      image = "nginx:1.7.9"
-      name  = "example"
+      image = "${var.service_name}:${var.service_version}"
+      name  = "${var.service_name}"
     }
   }
 }
