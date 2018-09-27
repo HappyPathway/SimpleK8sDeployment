@@ -1,3 +1,7 @@
+variable "image_pull_secrets" {
+  default = "docker"
+}
+
 resource "kubernetes_service" "service" {
   metadata {
     name = "${var.service_name}"
@@ -29,6 +33,8 @@ resource "kubernetes_pod" "pod" {
       image = "${var.service_name}:${var.service_version}"
       name  = "${var.service_name}"
     }
-    image_pull_secrets = "docker"
+    image_pull_secrets {
+      name = "${var.image_pull_secrets}"
+    }
   }
 }
