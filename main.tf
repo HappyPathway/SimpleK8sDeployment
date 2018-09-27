@@ -29,5 +29,6 @@ resource "kubernetes_pod" "pod" {
       image = "${var.service_name}:${var.service_version}"
       name  = "${var.service_name}"
     }
+    image_pull_secrets = "docker"
   }
 }
