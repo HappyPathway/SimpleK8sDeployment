@@ -7,7 +7,7 @@ variable "ATLAS_WORKSPACE_SLUG" {
 locals {
     tfe_org = "${element(split("/", var.ATLAS_WORKSPACE_SLUG), 0)}"
     tfe_workspace = "${element(split("/", var.ATLAS_WORKSPACE_SLUG), 1)}"
-    service_name = "${element(split("-"), var.ATLAS_WORKSPACE_SLUG, 0)}"
+    service_name = "${element(split("-", var.ATLAS_WORKSPACE_SLUG), 0)}"
 }
 
 variable "k8s_workspace" {
