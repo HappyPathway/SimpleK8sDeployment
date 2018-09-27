@@ -26,9 +26,9 @@ resource "kubernetes_service" "service" {
 
 resource "kubernetes_pod" "pod" {
   metadata {
-    name = "${${data.terraform_remote_state.build.service_name}"
+    name = "${data.terraform_remote_state.build.service_name}"
     labels {
-      app = "${${data.terraform_remote_state.build.service_name}"
+      app = "${data.terraform_remote_state.build.service_name}"
     }
   }
 
