@@ -2,6 +2,10 @@ variable "image_pull_secrets" {
   default = "docker"
 }
 
+variable "service_repo" {
+  default = "darnoldcontainerregistry1.azurecr.io"
+}
+
 resource "kubernetes_service" "service" {
   metadata {
     name = "${var.service_name}"
@@ -30,7 +34,7 @@ resource "kubernetes_pod" "pod" {
 
   spec {
     container {
-      image = "${var.service_name}:${var.service_version}"
+      image = "${var.service_repo}/${var.service_name}:${var.service_version}"
       name  = "${var.service_name}"
     }
     image_pull_secrets {
