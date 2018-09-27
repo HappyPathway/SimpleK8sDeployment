@@ -8,7 +8,7 @@ variable "service_repo" {
 
 resource "kubernetes_service" "service" {
   metadata {
-    name = "${data.terraform_remote_state.build.service_name}"
+    name = "${var.service_name}"
   }
   spec {
     selector {
