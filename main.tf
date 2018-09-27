@@ -3,7 +3,7 @@ variable "image_pull_secrets" {
 }
 
 variable "service_repo" {
-  default = "happypathway"
+  default = "hashicorp"
 }
 
 resource "kubernetes_service" "service" {
@@ -36,6 +36,7 @@ resource "kubernetes_pod" "pod" {
     container {
       image = "${var.service_repo}/${var.service_name}:${var.service_version}"
       name  = "${var.service_name}"
+      image_pull_policy = "Always"
     }
     image_pull_secrets {
       name = "${var.image_pull_secrets}"
