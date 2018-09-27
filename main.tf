@@ -1,9 +1,9 @@
 variable "image_pull_secrets" {
-  default = "docker"
+  default = "dockerhub"
 }
 
 variable "service_repo" {
-  default = "darnoldcontainerregistry1.azurecr.io"
+  default = "happypathway"
 }
 
 resource "kubernetes_service" "service" {
