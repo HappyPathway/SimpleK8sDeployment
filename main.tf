@@ -3,7 +3,7 @@ variable "image_pull_secrets" {
 }
 
 variable "service_repo" {
-  default = "hashicorp"
+  default = "happypathway"
 }
 
 resource "kubernetes_service" "service" {
