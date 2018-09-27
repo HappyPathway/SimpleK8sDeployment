@@ -7,7 +7,7 @@ variable "ATLAS_WORKSPACE_SLUG" {
 locals {
     tfe_org = "${element(split("/", var.ATLAS_WORKSPACE_SLUG), 0)}"
     tfe_workspace = "${element(split("/", var.ATLAS_WORKSPACE_SLUG), 1)}"
-    tfe_label_name = "${element(split("-", var.ATLAS_WORKSPACE_SLUG), 0)}"
+    tfe_label_name = "${element(split("-", local.tfe_workspace), 0)}"
 }
 
 variable "k8s_workspace" {
@@ -28,4 +28,11 @@ data "terraform_remote_state" "build" {
     config {
         name = "${local.tfe_org}/${local.tfe_label_name}-Packer-Build"
     }
+}
+
+data "terraform_remote_state" "version_check" {
+  backend = "atlas"
+  config {
+    name = "${local.tfe_org}/${local.tfe_label_name}-${var.k8s_workspace}-VersionCheck"
+  }
 }
