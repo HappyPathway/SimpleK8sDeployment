@@ -26,16 +26,16 @@ resource "kubernetes_service" "service" {
 
 resource "kubernetes_pod" "pod" {
   metadata {
-    name = "${data.terraform_remote_state.build.service_name}"
+    name = "${var.service_name}"
     labels {
-      app = "${data.terraform_remote_state.build.service_name}"
+      app = "${var.service_name}"
     }
   }
 
   spec {
     container {
-      image = "${var.service_repo}/${data.terraform_remote_state.build.service_name}:${data.terraform_remote_state.build.service_version}"
-      name  = "${data.terraform_remote_state.build.service_name}"
+      image = "${var.service_repo}/${var.service_name}:${var.service_version}"
+      name  = "${var.service_name}"
       image_pull_policy = "Always"
     }
     image_pull_secrets {
